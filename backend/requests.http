@@ -1,0 +1,19 @@
+### Cadastrar paciente válido (deve dar 201)
+POST http://localhost:8081/api/pacientes
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "idade": 45,
+  "telefone": "(11) 99999-9999"
+}
+
+### Paciente inválido (deve dar 400)
+POST http://localhost:8081/api/pacientes
+Content-Type: application/json
+
+{
+  "nome": "Jo",
+  "idade": 200,
+  "telefone": "123"
+}
