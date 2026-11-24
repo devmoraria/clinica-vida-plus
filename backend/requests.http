@@ -17,3 +17,34 @@ Content-Type: application/json
   "idade": 200,
   "telefone": "123"
 }
+### Cadastrar mais um paciente
+POST http://localhost:8081/api/pacientes
+Content-Type: application/json
+
+{
+  "nome": "Álvaro Lima",
+  "idade": 33,
+  "telefone": "(11) 98888-7777"
+}
+
+### Cadastrar outro paciente
+POST http://localhost:8081/api/pacientes
+Content-Type: application/json
+
+{
+  "nome": "Ana Costa",
+  "idade": 28,
+  "telefone": "(21) 97777-6666"
+}
+
+### Listar todos (ordenado por nome)
+GET http://localhost:8081/api/pacientes
+
+### Buscar sem acento e sem maiúscula (deve achar Álvaro Lima)
+GET http://localhost:8081/api/pacientes?nome=ALVARO
+
+### Buscar parte do nome (deve achar João Silva)
+GET http://localhost:8081/api/pacientes?nome=silva
+
+### Buscar nome que não existe (deve voltar lista vazia [])
+GET http://localhost:8081/api/pacientes?nome=zzz
