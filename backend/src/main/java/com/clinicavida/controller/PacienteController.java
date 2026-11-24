@@ -9,6 +9,7 @@ import com.clinicavida.service.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import com.clinicavida.dto.EstatisticasResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +33,9 @@ public class PacienteController {
         @GetMapping
     public List<PacienteResponse> listar(@RequestParam(required = false) String nome) {
         return pacienteService.listar(nome);
+    }
+        @GetMapping("/estatisticas")
+    public EstatisticasResponse estatisticas() {
+        return pacienteService.estatisticas();
     }
 }

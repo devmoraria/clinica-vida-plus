@@ -1,5 +1,6 @@
 package com.clinicavida.service;
 
+import com.clinicavida.dto.EstatisticasResponse;
 import java.text.Normalizer;
 import java.util.Comparator;
 import java.util.List;
@@ -37,6 +38,25 @@ public class PacienteService {
                 .sorted(Comparator.comparing((Paciente p) -> normalizar(p.nome())))
                 .map(PacienteResponse::de)
                 .toList();
+    }
+        public EstatisticasResponse estatisticas() {
+        List<Paciente> pacientes = pacienteRepository.listarTodos();
+
+        if (pacientes.isEmpty()) {
+            return new EstatisticasResponse(0, null, null, null);
+        }
+
+        double media = pacientes.stream().mapToInt(Paciente::idade).average().orElse(0);
+        Paciente maisNovo = pacientes.stream()
+                .min(Comparator.comparingInt(Paciente::idade)).orElseThrow();
+        Paciente maisVelho = pacientes.stream()
+                .max(Comparator.comparingInt(Paciente::idade)).orElseThrow();
+
+        return new EstatisticasResponse(
+                pacientes.size(),
+                Math.round(media * 10.0) / 10.0,
+                PacienteResponse.de(maisNovo),
+                PacienteResponse.de(maisVelho));
     }
 
     private static String normalizar(String texto) {

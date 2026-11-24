@@ -48,3 +48,6 @@ GET http://localhost:8081/api/pacientes?nome=silva
 
 ### Buscar nome que não existe (deve voltar lista vazia [])
 GET http://localhost:8081/api/pacientes?nome=zzz
+
+### Estatísticas
+GET http://localhost:8081/api/pacientes/estatisticas
