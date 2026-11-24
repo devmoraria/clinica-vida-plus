@@ -51,3 +51,13 @@ GET http://localhost:8081/api/pacientes?nome=zzz
 
 ### Estatísticas
 GET http://localhost:8081/api/pacientes/estatisticas
+
+### Erro: JSON com tipo errado (deve dar 400 limpo)
+POST http://localhost:8081/api/pacientes
+Content-Type: application/json
+
+{
+  "nome": "Maria Souza",
+  "idade": "quarenta",
+  "telefone": "(11) 99999-9999"
+}
