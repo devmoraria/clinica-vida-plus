@@ -1,1 +1,35 @@
-<p>cadastrar works!</p>
+<h2>Cadastrar paciente</h2>
+
+@if (cadastrado(); as p) {
+  <div class="aviso sucesso">
+    Paciente <strong>{{ p.nome }}</strong> cadastrado com sucesso (id {{ p.id }}).
+  </div>
+}
+
+@if (erroGeral()) {
+  <div class="aviso erro-geral">{{ erroGeral() }}</div>
+}
+
+<form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+  <div class="campo">
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" formControlName="nome" />
+    @if (erro('nome')) { <small class="erro">{{ erro('nome') }}</small> }
+  </div>
+
+  <div class="campo">
+    <label for="idade">Idade</label>
+    <input id="idade" type="number" formControlName="idade" />
+    @if (erro('idade')) { <small class="erro">{{ erro('idade') }}</small> }
+  </div>
+
+  <div class="campo">
+    <label for="telefone">Telefone</label>
+    <input id="telefone" type="text" formControlName="telefone" placeholder="(11) 99999-9999" />
+    @if (erro('telefone')) { <small class="erro">{{ erro('telefone') }}</small> }
+  </div>
+
+  <button type="submit" [disabled]="enviando()">
+    {{ enviando() ? 'Enviando...' : 'Cadastrar' }}
+  </button>
+</form>
