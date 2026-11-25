@@ -1,0 +1,13 @@
+<header class="topo">
+  <h1 class="marca">{{ title() }}</h1>
+  <nav class="menu">
+    <a routerLink="/cadastrar" routerLinkActive="ativo">Cadastrar</a>
+    <a routerLink="/listar" routerLinkActive="ativo">Listar</a>
+    <a routerLink="/buscar" routerLinkActive="ativo">Buscar</a>
+    <a routerLink="/estatisticas" routerLinkActive="ativo">Estatísticas</a>
+  </nav>
+</header>
+
+<main class="conteudo">
+  <router-outlet />
+</main>
