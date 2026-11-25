@@ -1,5 +1,4 @@
-package service;
-
+package com.clinicavida.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,7 +6,6 @@ import com.clinicavida.dto.EstatisticasResponse;
 import com.clinicavida.dto.PacienteRequest;
 import com.clinicavida.dto.PacienteResponse;
 import com.clinicavida.repository.PacienteRepositoryEmMemoria;
-import com.clinicavida.service.PacienteService;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
