@@ -1,1 +1,43 @@
-<p>buscar works!</p>
+<h2>Buscar paciente</h2>
+
+<form class="busca" (ngSubmit)="buscar()">
+  <input
+    type="text"
+    name="termo"
+    [(ngModel)]="termo"
+    placeholder="Digite o nome (acentos não importam)"
+  />
+  <button type="submit" [disabled]="carregando()">
+    {{ carregando() ? 'Buscando...' : 'Buscar' }}
+  </button>
+</form>
+
+@if (erro()) {
+  <div class="aviso erro-geral">{{ erro() }}</div>
+} @else if (buscou()) {
+  @if (resultados().length === 0) {
+    <p class="info">Nenhum paciente encontrado para "{{ termoBuscado() }}".</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Idade</th>
+          <th>Telefone</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of resultados(); track p.id) {
+          <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.nome }}</td>
+            <td>{{ p.idade }}</td>
+            <td>{{ p.telefone }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="info">{{ resultados().length }} resultado(s) para "{{ termoBuscado() }}".</p>
+  }
+}
