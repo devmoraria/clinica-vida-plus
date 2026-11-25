@@ -1,1 +1,39 @@
-<p>estatisticas works!</p>
+<div class="cabecalho">
+  <h2>Estatísticas</h2>
+  <button type="button" (click)="carregar()" [disabled]="carregando()">Atualizar</button>
+</div>
+
+@if (carregando()) {
+  <p class="info">Carregando...</p>
+} @else if (erro()) {
+  <div class="aviso erro-geral">{{ erro() }}</div>
+} @else if (dados(); as d) {
+  @if (d.total === 0) {
+    <p class="info">Nenhum paciente cadastrado ainda. Cadastre pacientes para ver as estatísticas.</p>
+  } @else {
+    <div class="cartoes">
+      <div class="cartao">
+        <span class="rotulo">Total de pacientes</span>
+        <span class="valor">{{ d.total }}</span>
+      </div>
+      <div class="cartao">
+        <span class="rotulo">Idade média</span>
+        <span class="valor">{{ d.idadeMedia | number: '1.1-1' }}</span>
+      </div>
+      @if (d.maisNovo; as n) {
+        <div class="cartao">
+          <span class="rotulo">Paciente mais novo</span>
+          <span class="valor pequeno">{{ n.nome }}</span>
+          <span class="detalhe">{{ n.idade }} anos</span>
+        </div>
+      }
+      @if (d.maisVelho; as v) {
+        <div class="cartao">
+          <span class="rotulo">Paciente mais velho</span>
+          <span class="valor pequeno">{{ v.nome }}</span>
+          <span class="detalhe">{{ v.idade }} anos</span>
+        </div>
+      }
+    </div>
+  }
+}
