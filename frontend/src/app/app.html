@@ -1,13 +1,32 @@
-<header class="topo">
-  <h1 class="marca">{{ title() }}</h1>
-  <nav class="menu">
-    <a routerLink="/cadastrar" routerLinkActive="ativo">Cadastrar</a>
-    <a routerLink="/listar" routerLinkActive="ativo">Listar</a>
-    <a routerLink="/buscar" routerLinkActive="ativo">Buscar</a>
-    <a routerLink="/estatisticas" routerLinkActive="ativo">Estatísticas</a>
-  </nav>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a routerLink="/cadastrar" class="brand" aria-label="Clínica Vida+">
+      <img src="logo.png" alt="Vida+ Clínica" />
+    </a>
+
+    <nav aria-label="Principal">
+      <a routerLink="/cadastrar" routerLinkActive="ativo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+        <span>Cadastrar</span>
+      </a>
+      <a routerLink="/listar" routerLinkActive="ativo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        <span>Listar</span>
+      </a>
+      <a routerLink="/buscar" routerLinkActive="ativo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Buscar</span>
+      </a>
+      <a routerLink="/estatisticas" routerLinkActive="ativo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 9v9M17 5v13"/></svg>
+        <span>Estatísticas</span>
+      </a>
+    </nav>
+  </div>
 </header>
 
 <main class="conteudo">
   <router-outlet />
 </main>
+
+<footer class="rodape">© {{ ano }} Clínica Vida+ · Cuidar de gente, com tecnologia.</footer>

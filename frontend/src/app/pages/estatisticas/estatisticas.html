@@ -1,39 +1,55 @@
-<div class="cabecalho">
-  <h2>Estatísticas</h2>
-  <button type="button" (click)="carregar()" [disabled]="carregando()">Atualizar</button>
-</div>
-
-@if (carregando()) {
-  <p class="info">Carregando...</p>
-} @else if (erro()) {
-  <div class="aviso erro-geral">{{ erro() }}</div>
-} @else if (dados(); as d) {
-  @if (d.total === 0) {
-    <p class="info">Nenhum paciente cadastrado ainda. Cadastre pacientes para ver as estatísticas.</p>
-  } @else {
-    <div class="cartoes">
-      <div class="cartao">
-        <span class="rotulo">Total de pacientes</span>
-        <span class="valor">{{ d.total }}</span>
-      </div>
-      <div class="cartao">
-        <span class="rotulo">Idade média</span>
-        <span class="valor">{{ d.idadeMedia | number: '1.1-1' }}</span>
-      </div>
-      @if (d.maisNovo; as n) {
-        <div class="cartao">
-          <span class="rotulo">Paciente mais novo</span>
-          <span class="valor pequeno">{{ n.nome }}</span>
-          <span class="detalhe">{{ n.idade }} anos</span>
-        </div>
-      }
-      @if (d.maisVelho; as v) {
-        <div class="cartao">
-          <span class="rotulo">Paciente mais velho</span>
-          <span class="valor pequeno">{{ v.nome }}</span>
-          <span class="detalhe">{{ v.idade }} anos</span>
-        </div>
-      }
+<section class="page">
+  <header class="page-head">
+    <div>
+      <h1>Estatísticas</h1>
+      <p class="sub">Um resumo rápido dos pacientes da clínica.</p>
     </div>
+    <button type="button" class="btn ghost" (click)="carregar()" [disabled]="carregando()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+      Atualizar
+    </button>
+  </header>
+
+  @if (carregando()) {
+    <div class="card carregando"><div class="spinner"></div> Carregando estatísticas...</div>
+  } @else if (erro()) {
+    <div class="aviso erro-geral">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <span>{{ erro() }}</span>
+    </div>
+  } @else if (dados(); as d) {
+    @if (d.total === 0) {
+      <div class="card vazio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 9v9M17 5v13"/></svg>
+        <strong>Nenhum paciente cadastrado ainda.</strong>
+        <span>Cadastre pacientes para ver as estatísticas.</span>
+      </div>
+    } @else {
+      <div class="cartoes">
+        <div class="cartao c1">
+          <span class="rotulo">Total de pacientes</span>
+          <span class="valor">{{ d.total }}</span>
+        </div>
+        <div class="cartao c2">
+          <span class="rotulo">Idade média</span>
+          <span class="valor">{{ d.idadeMedia | number: '1.1-1' : 'pt-BR' }}</span>
+          <span class="detalhe">anos</span>
+        </div>
+        @if (d.maisNovo; as n) {
+          <div class="cartao c3">
+            <span class="rotulo">Paciente mais novo</span>
+            <span class="valor pequeno">{{ n.nome }}</span>
+            <span class="detalhe">{{ n.idade }} anos</span>
+          </div>
+        }
+        @if (d.maisVelho; as v) {
+          <div class="cartao c4">
+            <span class="rotulo">Paciente mais velho</span>
+            <span class="valor pequeno">{{ v.nome }}</span>
+            <span class="detalhe">{{ v.idade }} anos</span>
+          </div>
+        }
+      </div>
+    }
   }
-}
+</section>

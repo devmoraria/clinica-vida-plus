@@ -1,43 +1,52 @@
-<h2>Buscar paciente</h2>
+<section class="page">
+  <header class="page-head">
+    <div>
+      <h1>Buscar paciente</h1>
+      <p class="sub">Encontre pelo nome. Acentos e maiúsculas não importam.</p>
+    </div>
+  </header>
 
-<form class="busca" (ngSubmit)="buscar()">
-  <input
-    type="text"
-    name="termo"
-    [(ngModel)]="termo"
-    placeholder="Digite o nome (acentos não importam)"
-  />
-  <button type="submit" [disabled]="carregando()">
-    {{ carregando() ? 'Buscando...' : 'Buscar' }}
-  </button>
-</form>
+  <form class="card busca" (ngSubmit)="buscar()">
+    <svg class="lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input class="input" type="text" name="termo" [(ngModel)]="termo" placeholder="Ex.: jose, alvares, maria..." />
+    <button type="submit" class="btn" [disabled]="carregando()">
+      {{ carregando() ? 'Buscando...' : 'Buscar' }}
+    </button>
+  </form>
 
-@if (erro()) {
-  <div class="aviso erro-geral">{{ erro() }}</div>
-} @else if (buscou()) {
-  @if (resultados().length === 0) {
-    <p class="info">Nenhum paciente encontrado para "{{ termoBuscado() }}".</p>
-  } @else {
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Idade</th>
-          <th>Telefone</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (p of resultados(); track p.id) {
-          <tr>
-            <td>{{ p.id }}</td>
-            <td>{{ p.nome }}</td>
-            <td>{{ p.idade }}</td>
-            <td>{{ p.telefone }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-    <p class="info">{{ resultados().length }} resultado(s) para "{{ termoBuscado() }}".</p>
+  @if (erro()) {
+    <div class="aviso erro-geral">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <span>{{ erro() }}</span>
+    </div>
+  } @else if (buscou()) {
+    <div class="card">
+      @if (resultados().length === 0) {
+        <div class="vazio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3M8 11h6"/></svg>
+          <strong>Nenhum paciente encontrado</strong>
+          <span>Nada encontrado para "{{ termoBuscado() }}". Tente outro nome.</span>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Paciente</th><th>Idade</th><th>Telefone</th></tr>
+            </thead>
+            <tbody>
+              @for (p of resultados(); track p.id) {
+                <tr>
+                  <td class="id">#{{ p.id }}</td>
+                  <td><div class="pessoa"><span class="avatar">{{ p.nome.charAt(0).toUpperCase() }}</span>{{ p.nome }}</div></td>
+                  <td><span class="chip">{{ p.idade }} anos</span></td>
+                  <td>{{ p.telefone }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <div class="rodape-tabela">{{ resultados().length }} resultado(s) para "{{ termoBuscado() }}".</div>
+      }
+    </div>
   }
-}
+</section>

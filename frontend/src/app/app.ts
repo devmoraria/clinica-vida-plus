@@ -1,5 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+
+registerLocaleData(localePt);
 
 @Component({
   selector: 'app-root',
@@ -8,5 +12,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('Clínica Vida+');
+  protected readonly ano = new Date().getFullYear();
 }
